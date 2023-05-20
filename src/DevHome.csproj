@@ -104,12 +104,12 @@
         <DefineConstants Condition="'$(BuildRing)'=='Stable'">$(DefineConstants);STABLE_BUILD</DefineConstants>
     </PropertyGroup>
 
-    <Target Name="PwshFiles" AfterTargets="AfterPublish">
+    <Target Name="PwshFiles" AfterTargets="AfterBuild">
         <ItemGroup>
             <RefFiles Include="$(PkgMicrosoft_PowerShell_SDK)\contentFiles\any\any\ref\*.*" />
             <WinModuleFiles Include="$(PkgMicrosoft_PowerShell_SDK)\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\**\*.*" />
         </ItemGroup>
-        <Copy SourceFiles="@(RefFiles)" DestinationFolder="$(PublishDir)\ref\" />
-        <Copy SourceFiles="@(WinModuleFiles)" DestinationFolder="$(PublishDir)\Modules\%(RecursiveDir)\" />
+        <Copy SourceFiles="@(RefFiles)" DestinationFolder="$(TargetDir)\ref\" />
+        <Copy SourceFiles="@(WinModuleFiles)" DestinationFolder="$(TargetDir)\Modules\%(RecursiveDir)\" />
     </Target>
 </Project>
