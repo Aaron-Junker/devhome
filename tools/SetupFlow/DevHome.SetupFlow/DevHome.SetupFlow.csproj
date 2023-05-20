@@ -18,7 +18,7 @@
     <PackageReference Include="LibGit2Sharp" Version="0.27.0-preview-0182" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.Internal.Windows.DevHome.Helpers" Version="1.0.*-*" />
-    <PackageReference Include="Microsoft.Management.Configuration" Version="0.0.3" />
+    <PackageReference Include="Microsoft.WindowsPackageManager.Configuration" Version="0.0.3" />
     <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.2.8" GeneratePathProperty="true">
       <ExcludeAssets>contentFiles</ExcludeAssets>
     </PackageReference>
@@ -214,12 +214,12 @@
     </Content>
   </ItemGroup>
 
-  <Target Name="PwshFiles" AfterTargets="AfterBuild">
+  <Target Name="PwshFiles" AfterTargets="BeforeBuild">
     <ItemGroup>
       <RefFiles Include="$(PkgMicrosoft_PowerShell_SDK)\contentFiles\any\any\ref\*.*" />
       <WinModuleFiles Include="$(PkgMicrosoft_PowerShell_SDK)\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\**\*.*" />
     </ItemGroup>
-    <Copy SourceFiles="@(RefFiles)" DestinationFolder="$(OutputPath)\ref\" />
-    <Copy SourceFiles="@(WinModuleFiles)" DestinationFolder="$(OutputPath)\Modules\%(RecursiveDir)\" />
+    <Copy SourceFiles="@(RefFiles)" DestinationFolder="$(TargetDir)\ref\" />
+    <Copy SourceFiles="@(WinModuleFiles)" DestinationFolder="$(TargetDir)\Modules\%(RecursiveDir)\" />
   </Target>
 </Project>
