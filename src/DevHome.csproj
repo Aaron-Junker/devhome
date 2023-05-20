@@ -104,12 +104,17 @@
         <DefineConstants Condition="'$(BuildRing)'=='Stable'">$(DefineConstants);STABLE_BUILD</DefineConstants>
     </PropertyGroup>
 
+    <ItemGroup>
+        <Content Include="$(TargetDir)\Modules\**" Link="Modules\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+        <Content Include="$(TargetDir)\ref\**" Link="ref\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+
     <Target Name="PwshFiles" AfterTargets="BeforeBuild">
-      <ItemGroup>
-        <RefFiles Include="$(PkgMicrosoft_PowerShell_SDK)\contentFiles\any\any\ref\*.*" />
-        <WinModuleFiles Include="$(PkgMicrosoft_PowerShell_SDK)\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\**\*.*" />
-      </ItemGroup>
-      <Copy SourceFiles="@(RefFiles)" DestinationFolder="$(TargetDir)\ref\" />
-      <Copy SourceFiles="@(WinModuleFiles)" DestinationFolder="$(TargetDir)\Modules\%(RecursiveDir)\" />
+        <ItemGroup>
+            <RefFiles Include="$(PkgMicrosoft_PowerShell_SDK)\contentFiles\any\any\ref\*.*" />
+            <WinModuleFiles Include="$(PkgMicrosoft_PowerShell_SDK)\contentFiles\any\any\runtimes\win\lib\net6.0\Modules\**\*.*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(RefFiles)" DestinationFolder="$(TargetDir)\ref\" />
+        <Copy SourceFiles="@(WinModuleFiles)" DestinationFolder="$(TargetDir)\Modules\%(RecursiveDir)\" />
     </Target>
 </Project>
