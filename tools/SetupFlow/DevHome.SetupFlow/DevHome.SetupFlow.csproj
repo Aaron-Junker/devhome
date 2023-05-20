@@ -213,6 +213,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="$(TargetDir)\Modules\**" Link="Modules\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="$(TargetDir)\ref\**" Link="ref\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 
   <Target Name="PwshFiles" AfterTargets="BeforeBuild">
     <ItemGroup>
